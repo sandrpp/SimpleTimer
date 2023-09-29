@@ -1,4 +1,4 @@
-# GoodTimer
+# SimpleTimer
 
 ![timer_picture](https://i.postimg.cc/PfSTDTBM/timer-nb.png)
 
