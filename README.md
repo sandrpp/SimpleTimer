@@ -6,7 +6,7 @@ A **minecraft plugin** to display a **timer** in the actionbar.
 
 you can configure the timer via the command "/timer".
 
-**Command-Arguemnts:**
+**Command-Arguments:**
 - start (start the timer)
 - pause (stop the timer, you can run it with the start argument)
 - reset (set time ro 0)
