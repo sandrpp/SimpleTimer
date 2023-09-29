@@ -4,6 +4,9 @@
 
 A **minecraft plugin** to display a **timer** in the actionbar.
 
+### Download
+
+Download the plugin via [Modrinth](https://modrinth.com/plugin/simpletimer/)
 
 ### Credits
 
