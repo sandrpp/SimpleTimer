@@ -1,4 +1,5 @@
 name: SimpleTimer
 version: '${version}'
-main: me.sandrp.simpletimer.SimpleTimer
+main: me.sandrp.simpletimer.Main
+author: sandrp
 api-version: '1.20'

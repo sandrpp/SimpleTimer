@@ -1,4 +1,4 @@
-package me.gemmerr.goodtimer.message;
+package me.sandrp.simpletimer.message;
 
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;

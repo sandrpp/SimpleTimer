@@ -1,6 +1,6 @@
-package me.sandrp.utils;
+package me.sandrp.simpletimer;
 
-import me.sandrp.utils.command.UtilsCommand;
+import me.sandrp.simpletimer.timer.command.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -15,7 +15,7 @@ public class CommandRegister {
 
     static {
         //commands
-        COMMANDS.put("utils", new UtilsCommand());
+        COMMANDS.put("timer", new Timer());
     }
     public static void registerCommand(@NotNull String name, @NotNull Command command, @NotNull Server server){
         COMMANDS.put(name, command);
