@@ -2,7 +2,7 @@
 
 ![timer_picture](https://i.postimg.cc/PfSTDTBM/timer-nb.png)
 
-A minecarft plugin to display a timer in the actionbar
+A minecraft plugin to display a timer in the actionbar
 
 you can do things with the timer via the command "/timer".
 
