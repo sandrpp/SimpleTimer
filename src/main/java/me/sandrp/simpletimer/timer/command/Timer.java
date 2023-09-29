@@ -143,7 +143,7 @@ public class Timer extends Command {
     }
 
     public static String shortInteger(int duration) {
-        String string = "<grey>Timer / <gradient:#fd0168:#c844e8><bold>";
+        String string = "<grey>Timer - <gradient:#fd0168:#c844e8><bold>";
         int hours = 0;
         int minutes = 0;
         int seconds = 0;

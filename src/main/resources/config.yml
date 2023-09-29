@@ -1,5 +1,5 @@
-timer = 0
-running = false
+timer: 0
+running: false
 
 # do not edit
 # see wiki for information on ingame commands https://github.com/Gxmmxr/SimpleTimer/wiki/

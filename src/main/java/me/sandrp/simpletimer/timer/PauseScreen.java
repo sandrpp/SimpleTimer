@@ -10,13 +10,33 @@ import javax.swing.*;
 
 public class PauseScreen {
 
+    static int counter = 1;
     public static void send (){
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 if(!Timer.isRunning() && Main.getPlugin().getConfig().getBoolean("enabled")) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer / <#da4918><bold>paused"));
+                        try {
+                            if(counter == 1){
+                                player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer - <#da4918><bold>paused"));
+                                counter++;
+                            }else if(counter == 2){
+                                player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer / <#da4918><bold>paused"));
+                                counter++;
+                            }
+                            else if(counter == 3){
+                                player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer | <#da4918><bold>paused"));
+                                counter++;
+                            }
+                            else if(counter == 4){
+                                player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer \\ <#da4918><bold>paused"));
+                                counter = 1;
+                            }
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
             }
