@@ -15,5 +15,5 @@ you can do things with the timer via the command "/timer".
 
 SimpleTimer supports RGB colors and gradients through [MiniMessage](https://github.com/KyoriPowered/adventure) API.
 
-Let me know if there are any errors on the plugin.
-Also let me know if there are any features you would like to see in the plugin.
+_Let me know if there are any errors on the plugin.
+Also let me know if there are any features you would like to see in the plugin._
