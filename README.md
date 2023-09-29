@@ -4,7 +4,7 @@
 
 A **minecraft plugin** to display a **timer** in the actionbar.
 
-you can do things with the timer via the command "/timer".
+you can configure the timer via the command "/timer".
 
 **Command-Arguemnts:**
 - start (start the timer)
