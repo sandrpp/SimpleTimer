@@ -3,6 +3,7 @@
 ![timer_picture](https://i.postimg.cc/PfSTDTBM/timer-nb.png)
 
 A **minecraft plugin** to display a **timer** in the actionbar.
+see the [wiki](https://github.com/Gxmmxr/SimpleTimer/wiki/) for a explanation of all commands.
 
 ### Download
 
