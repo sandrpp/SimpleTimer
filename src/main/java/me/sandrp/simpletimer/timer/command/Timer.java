@@ -5,6 +5,7 @@ import me.sandrp.simpletimer.message.ActionBar;
 import me.sandrp.simpletimer.message.Chat;
 import me.sandrp.simpletimer.message.Console;
 import me.sandrp.simpletimer.message.PluginInfo;
+import net.kyori.adventure.util.RGBLike;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.css.RGBColor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +32,13 @@ public class Timer extends Command {
     public static boolean timerRunning = Main.getPlugin().getConfig().getBoolean("running");
     public static int timer = Main.getPlugin().getConfig().getInt("timer");
     public static BukkitRunnable runnable;
+
+    private static String rgb1 = "#fd0168";
+    private static String rgb2 = "#c844e8";
+
+    private static boolean up =  Main.getPlugin().getConfig().getBoolean("up");
+
+    private static int counter = 1;
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
         if(args.length == 0){
@@ -91,6 +100,26 @@ public class Timer extends Command {
                             startTimer(player);
                         }
                         break;
+                    case "up":
+                        if(up) {
+                            Chat.sendErrorPrefixMessage(player, "the timer is already counting up");
+                        }else {
+                            up = true;
+                            Main.getPlugin().getConfig().set("up", true);
+                            Main.getPlugin().saveConfig();
+                            Chat.sendPrefixMessage(player, "the timer now counts up");
+                        }
+                        break;
+                    case "down":
+                        if(!up) {
+                            Chat.sendErrorPrefixMessage(player, "the timer is already counting down");
+                        }else {
+                            up = false;
+                            Main.getPlugin().getConfig().set("up", false);
+                            Main.getPlugin().saveConfig();
+                            Chat.sendPrefixMessage(player, "the timer now counts down");
+                        }
+                        break;
                     default:
                         usageMessage(player);
                         break;
@@ -121,29 +150,84 @@ public class Timer extends Command {
 
     //method to start the timer
     public static void startTimer(Player player){
-        if (!timerRunning) {
-            timerRunning = true;
+        /* if (!timerRunning) {
             Chat.sendPrefixMessage(player, "<grey>you started the timer!");
-            runnable = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    //send Timer in actionbar
+            if(up) {
+                timerRunning = true;
+                runnable = new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        //send Timer in actionbar
 
-                    ActionBar.sendBroadcastMessage((shortInteger(timer)));
+                        ActionBar.sendBroadcastMessage((shortInteger(timer)));
 
-                    timer++;
-                    Main.getPlugin().getConfig().set("timer", timer);
-                    Main.getPlugin().saveConfig();
+                        timer++;
+                        Main.getPlugin().getConfig().set("timer", timer);
+                        Main.getPlugin().saveConfig();
+                    }
+                };
+                runnable.runTaskTimer(Main.getPlugin(), 0, 20);
+            }else{
+                if(timer != 0 ) {
+                    timerRunning = true;
+                    runnable = new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            //send Timer in actionbar
+                            if(timer!=0) {
+                                ActionBar.sendBroadcastMessage((shortInteger(timer)));
+
+                                timer--;
+                                Main.getPlugin().getConfig().set("timer", timer);
+                                Main.getPlugin().saveConfig();
+                            }else{
+                                Chat.sendPrefixMessage(player, "finished!");
+                            }
+                        }
+                    };
+                    runnable.runTaskTimer(Main.getPlugin(), 0, 20);
+                }else{
+                    Chat.sendErrorPrefixMessage(player, "the timer is set to 0. Change it to a higher number to count backwards");
                 }
-            };
-            runnable.runTaskTimer(Main.getPlugin(), 0, 20);
+            }
         } else{
             Chat.sendPrefixMessage(player, "<red>the timer is already running!");
+        }*/
+        if (!timerRunning){
+            if (!up && timer == 0) {
+                Chat.sendErrorPrefixMessage(player, "the timer is set to 0. change it to a higher number to count backwards");
+            }else{
+                timerRunning = true;
+                runnable = new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        //send Timer in actionbar
+
+                        ActionBar.sendBroadcastMessage((shortInteger(timer)));
+                        if(up){
+                            timer++;
+                        } else{
+                            if(timer==0){
+                                Chat.sendPrefixMessage(player, "timer finished!");
+                                timerRunning=false;
+                                runnable.cancel();
+                            }else {
+                                timer--;
+                            }
+                        }
+                        Main.getPlugin().getConfig().set("timer", timer);
+                        Main.getPlugin().saveConfig();
+                    }
+                };
+                runnable.runTaskTimer(Main.getPlugin(), 0, 20);
+            }
+
         }
     }
 
     public static String shortInteger(int duration) {
-        String string = "<grey>Timer - <gradient:#fd0168:#c844e8><bold>";
+        //String string = "<grey>Timer - <gradient:#fd0168:#c844e8><bold>";
+        String string = "<grey>Timer - <gradient:" + rgb1 +":" + rgb2 + "><bold>";
         int hours = 0;
         int minutes = 0;
         int seconds = 0;
@@ -227,6 +311,8 @@ public class Timer extends Command {
             list.add("set");
             list.add("enable");
             list.add("disable");
+            list.add("up");
+            list.add("down");
             return list;
         }
         return null;

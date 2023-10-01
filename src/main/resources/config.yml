@@ -1,5 +1,6 @@
 timer: 0
 running: false
+up: true
 
 # do not edit
 # see wiki for information on ingame commands https://github.com/Gxmmxr/SimpleTimer/wiki/
