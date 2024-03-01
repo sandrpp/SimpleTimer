@@ -32,6 +32,8 @@ public class PluginInfo {
             Chat.sendMessage(player, "<dark_grey>(reset the plugin)</dark_grey>");
             Chat.sendMessage(player, "<grey>/timer toggle");
             Chat.sendMessage(player, "<dark_grey>(toggle the the timer on/off)</dark_grey>");
+            Chat.sendMessage(player, "<grey>/timer up/down");
+            Chat.sendMessage(player, "<dark_grey>(make the timer count up or down)</dark_grey>");
             Chat.sendMessage(player, "<st><grey>        </st> <gradient:#fd0168:#c844e8>" + pluginName + "</gradient:#fd0168:#c844e8> <st><grey>        </grey></st>");
         }
         else{

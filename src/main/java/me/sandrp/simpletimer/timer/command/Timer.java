@@ -60,6 +60,7 @@ public class Timer extends Command {
                             config.set("enabled", true);
                         }
                         break;
+                    case "stop":
                     case "pause":
                         if (timerRunning) {
                             timerRunning = false;
