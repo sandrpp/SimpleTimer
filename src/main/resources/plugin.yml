@@ -3,3 +3,10 @@ version: '${version}'
 main: me.sandrp.simpletimer.Main
 author: sandrp
 api-version: '1.20'
+permissions:
+  timer.use:
+    default: op
+    description: "Permission to use the timer commands"
+  timer.admin:
+    default: op
+    description: "Permission for admin commands"

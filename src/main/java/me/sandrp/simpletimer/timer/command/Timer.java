@@ -5,15 +5,12 @@ import me.sandrp.simpletimer.message.ActionBar;
 import me.sandrp.simpletimer.message.Chat;
 import me.sandrp.simpletimer.message.Console;
 import me.sandrp.simpletimer.message.PluginInfo;
-import net.kyori.adventure.util.RGBLike;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.css.RGBColor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,23 +64,39 @@ public class Timer extends Command {
                             runnable.cancel();
                             Chat.sendPrefixMessage(player, "<grey>you paused the timer!");
                         } else {
-                            mustRun(player);
+                            mustRunMessage(player);
                         }
                         break;
                     case "disable":
-                        if (timerRunning) {
-                            timerRunning = false;
-                            runnable.cancel();
+                        if(!player.hasPermission("timer.admin")){
+                            permissionMessage(player);
                         }
-                        config.set("enabled", false);
-                        Main.getPlugin().saveConfig();
-                        Chat.sendPrefixMessage(player, "<grey>you disabled the timer plugin!");
-                        break;
+                        else if(!config.getBoolean("enabled")){
+                            disabledMessage(player);
+                        }
+                        else {
+                            if (timerRunning) {
+                                timerRunning = false;
+                                runnable.cancel();
+                            }
+                            config.set("enabled", false);
+                            Main.getPlugin().saveConfig();
+                            Chat.sendPrefixMessage(player, "<grey>you disabled the timer plugin!");
+                            break;
+                        }
                     case "enable":
-                        config.set("enabled", true);
-                        Main.getPlugin().saveConfig();
-                        Chat.sendPrefixMessage(player, "<grey>you enabled the timer plugin!");
-                        break;
+                        if(!player.hasPermission("timer.admin")){
+                            permissionMessage(player);
+                        }
+                        else if(config.getBoolean("enabled")){
+                            enabledMessage(player);
+                        }
+                        else {
+                            config.set("enabled", true);
+                            Main.getPlugin().saveConfig();
+                            Chat.sendPrefixMessage(player, "<grey>you enabled the timer plugin!");
+                            break;
+                        }
                     case "reset":
                         timer = 0;
                         timerRunning = false;
@@ -144,7 +157,7 @@ public class Timer extends Command {
             }
         }
         else{
-            mustPlayer();
+            mustPlayerMessage();
         }
         return false;
     }
@@ -235,14 +248,19 @@ public class Timer extends Command {
         Chat.sendErrorPrefixMessage(player, "you don't have the permission to do this");
     }
     //timer has to be running message
-    public void mustRun(Player player){
+    public void mustRunMessage(Player player){
         Chat.sendErrorPrefixMessage(player, "the timer hast to be running to do this");
     }
     //have to be player to execute
-    public static void mustPlayer(){
+    public static void mustPlayerMessage(){
         Console.sendErrorPrefixMessage("you have to be a player to run this command");
     }
-
+    public static void enabledMessage(Player player){
+        Chat.sendErrorPrefixMessage(player, "the timer is already enabled");
+    }
+    public static void disabledMessage(Player player){
+        Chat.sendErrorPrefixMessage(player, "the timer is already disabled");
+    }
     public static boolean isRunning() {
         return timerRunning;
     }
@@ -267,8 +285,6 @@ public class Timer extends Command {
             list.add("pause");
             list.add("reset");
             list.add("set");
-            list.add("enable");
-            list.add("disable");
             list.add("up");
             list.add("down");
             return list;

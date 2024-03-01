@@ -24,10 +24,12 @@ public class PluginInfo {
             Chat.sendMessage(player, "<dark_grey>(start the timer)</dark_grey>");
             Chat.sendMessage(player, "<grey>/timer pause/stop");
             Chat.sendMessage(player, "<dark_grey>(pause the timer)</dark_grey>");
-            Chat.sendMessage(player, "<grey>/timer enable");
-            Chat.sendMessage(player, "<dark_grey>(enable the plugin)</dark_grey>");
-            Chat.sendMessage(player, "<grey>/timer disable");
-            Chat.sendMessage(player, "<dark_grey>(disable the plugin)</dark_grey>");
+            if(player.hasPermission("timer.admin")) {
+                Chat.sendMessage(player, "<grey>/timer enable");
+                Chat.sendMessage(player, "<dark_grey>(enable the plugin)</dark_grey>");
+                Chat.sendMessage(player, "<grey>/timer disable");
+                Chat.sendMessage(player, "<dark_grey>(disable the plugin)</dark_grey>");
+            }
             Chat.sendMessage(player, "<grey>/timer reset");
             Chat.sendMessage(player, "<dark_grey>(reset the plugin)</dark_grey>");
             Chat.sendMessage(player, "<grey>/timer toggle");
@@ -53,6 +55,8 @@ public class PluginInfo {
             Console.sendMessage("<dark_grey>(reset the plugin)</dark_grey>");
             Console.sendMessage("<grey>/timer toggle");
             Console.sendMessage("<dark_grey>(toggle the the timer on/off)</dark_grey>");
+            Console.sendMessage("<grey>/timer up/down");
+            Console.sendMessage("<dark_grey>(make the timer count up or down)</dark_grey>");
             Console.sendMessage("<st><grey>        </st> <gradient:#fd0168:#c844e8>" + pluginName + "</gradient:#fd0168:#c844e8> <st><grey>        </grey></st>");
         }
     }
