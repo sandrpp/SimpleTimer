@@ -125,7 +125,7 @@ public class Timer extends Command {
                         break;
                 }
             }else if(args.length == 2 && args[0].equals("set")){
-                if(timerRunning && config.getBoolean("enabled")) {
+                if(config.getBoolean("enabled")) {
                     try {
                         timer = Integer.parseInt(args[1]);
                         Chat.sendPrefixMessage(player, "<grey>the time was set to <#fd0168>" + args[1] + "s</#fd0168>!");
@@ -135,7 +135,7 @@ public class Timer extends Command {
                         Chat.sendPrefixMessage(player, "<red>the second argument has to be a number!");
                     }
                 }else{
-                    mustRun(player);
+                    Chat.sendErrorPrefixMessage(player, "the timer has to be enabled");
                 }
             }
             else{
@@ -150,49 +150,6 @@ public class Timer extends Command {
 
     //method to start the timer
     public static void startTimer(Player player){
-        /* if (!timerRunning) {
-            Chat.sendPrefixMessage(player, "<grey>you started the timer!");
-            if(up) {
-                timerRunning = true;
-                runnable = new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        //send Timer in actionbar
-
-                        ActionBar.sendBroadcastMessage((shortInteger(timer)));
-
-                        timer++;
-                        Main.getPlugin().getConfig().set("timer", timer);
-                        Main.getPlugin().saveConfig();
-                    }
-                };
-                runnable.runTaskTimer(Main.getPlugin(), 0, 20);
-            }else{
-                if(timer != 0 ) {
-                    timerRunning = true;
-                    runnable = new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            //send Timer in actionbar
-                            if(timer!=0) {
-                                ActionBar.sendBroadcastMessage((shortInteger(timer)));
-
-                                timer--;
-                                Main.getPlugin().getConfig().set("timer", timer);
-                                Main.getPlugin().saveConfig();
-                            }else{
-                                Chat.sendPrefixMessage(player, "finished!");
-                            }
-                        }
-                    };
-                    runnable.runTaskTimer(Main.getPlugin(), 0, 20);
-                }else{
-                    Chat.sendErrorPrefixMessage(player, "the timer is set to 0. Change it to a higher number to count backwards");
-                }
-            }
-        } else{
-            Chat.sendPrefixMessage(player, "<red>the timer is already running!");
-        }*/
         if (!timerRunning){
             if (!up && timer == 0) {
                 Chat.sendErrorPrefixMessage(player, "the timer is set to 0. change it to a higher number to count backwards");
