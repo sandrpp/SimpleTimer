@@ -22,14 +22,17 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        //set verison and author
         version = this.getDescription().getVersion();
         if(this.getDescription().getAuthors().get(0) != null) {
             author = this.getDescription().getAuthors().get(0);
         }else{
             author = "none";
         }
-        plugin = this;
 
+        //set plugin
+        plugin = this;
+        
         //pause Screen when not enabled
         PauseScreen.send();
 

@@ -1,6 +1,7 @@
 timer: 0
 running: false
 up: true
+enabled: true
 
 # do not edit
-# see wiki for information on ingame commands https://github.com/Gxmmxr/SimpleTimer/wiki/
+# see wiki for information on in-game commands https://github.com/Gxmmxr/SimpleTimer/wiki/
