@@ -1,6 +1,7 @@
 package me.sandrp.simpletimer;
 
-import me.sandrp.simpletimer.timer.command.Timer;
+import me.sandrp.simpletimer.timer.command.TimerCommand;
+import me.sandrp.simpletimer.timer.command.TimerToggleCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -15,7 +16,8 @@ public class CommandRegister {
 
     static {
         //commands
-        COMMANDS.put("timer", new Timer());
+        COMMANDS.put("timer", new TimerCommand());
+        COMMANDS.put("/", new TimerToggleCommand());
     }
     public static void registerCommand(@NotNull String name, @NotNull Command command, @NotNull Server server){
         COMMANDS.put(name, command);
@@ -28,7 +30,7 @@ public class CommandRegister {
     }
 
     public static void registerCommands(@NotNull Server server){
-        COMMANDS.forEach(((s, command) -> server.getCommandMap().register(s, "SoulCommands", command)));
+        COMMANDS.forEach(((s, command) -> server.getCommandMap().register(s, "Commands", command)));
     }
 
     public static void registerCommands(){

@@ -1,10 +1,9 @@
 package me.sandrp.simpletimer;
 
-import me.sandrp.simpletimer.timer.PauseScreen;
+import me.sandrp.simpletimer.timer.PauseScreenManager;
+import me.sandrp.simpletimer.timer.TimerManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.command.Command;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,29 +11,21 @@ public final class Main extends JavaPlugin {
 
     //Plugin info
     public static Main plugin;
-    private static String author;
-    private static String version;
 
     //MiniMessage
     public static final MiniMessage miniMessage = MiniMessage.miniMessage();
-    public static final Component prefix = miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#fd0168:#c844e8><bold>SimpleTimer</bold><dark_grey>]</dark_grey> ");
+    public static final Component prefix = miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#ffd6ff:#bbd0ff><bold>SimpleTimer</bold><dark_grey>]</dark_grey> ");
     public static final Component errorPrefix = miniMessage.deserialize("Error: ");
+    private static TimerManager timerManager;
 
     @Override
     public void onEnable() {
-        //set verison and author
-        version = this.getDescription().getVersion();
-        if(this.getDescription().getAuthors().get(0) != null) {
-            author = this.getDescription().getAuthors().get(0);
-        }else{
-            author = "none";
-        }
-
         //set plugin
         plugin = this;
-        
-        //pause Screen when not enabled
-        PauseScreen.send();
+
+        //set timerManager & pauseScreenManager
+        timerManager = new TimerManager();
+        timerManager.getPauseScreenManager().startPauseScreen();
 
         //register Commands
         CommandRegister.registerCommands(this.getServer());
@@ -42,17 +33,17 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        timerManager.disableTimer();
+        CommandRegister.unregisterCommands(this.getServer());
     }
 
     public static Main getPlugin() {
         return plugin;
     }
 
-    public static String getAuthor() {
-        return author;
-    }
 
-    public static String getVersion() {
-        return version;
+    @NotNull
+    public static TimerManager getTimerManager() {
+        return timerManager;
     }
 }
