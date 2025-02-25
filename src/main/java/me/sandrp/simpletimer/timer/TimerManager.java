@@ -66,7 +66,7 @@ public class TimerManager {
                             cancel();
                         }
                     }
-                    ActionBarMessage.broadcastMessage("<grey>Timer - <gradient:" + hex1 + ":" + hex2 + ":" + phase + "><bold>" + MessageManager.shortInteger(timer));
+                    ActionBarMessage.broadcastMessage("<grey>Timer • <gradient:" + hex1 + ":" + hex2 + ":" + phase + "><bold>" + MessageManager.shortInteger(timer));
                     config.set("timer", timer);
                     Main.getPlugin().saveConfig();
                 }
