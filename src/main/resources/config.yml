@@ -2,6 +2,8 @@ timer: 0
 running: false
 up: true
 visible: true
+hex1: "#bbd0ff"
+hex2: "#ffd6ff"
 
 # do not edit
 # see wiki for information on in-game commands https://github.com/Gxmmxr/SimpleTimer/wiki/

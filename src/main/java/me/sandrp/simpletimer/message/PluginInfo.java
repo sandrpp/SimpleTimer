@@ -2,21 +2,18 @@ package me.sandrp.simpletimer.message;
 
 import me.sandrp.simpletimer.Main;
 import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Console;
 import java.util.List;
-import java.util.logging.ConsoleHandler;
 
 public class PluginInfo {
 
-    private static MiniMessage miniMessage = MiniMessage.miniMessage();
-    private static ConsoleCommandSender console = Main.getPlugin().getServer().getConsoleSender();
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private static final ConsoleCommandSender console = Main.getPlugin().getServer().getConsoleSender();
 
     public static void send(@NotNull CommandSender commandSender, String pluginName, List<String> authors, String version, boolean miniMessageApiHint) {
         String authorsString = String.join(", ", authors);

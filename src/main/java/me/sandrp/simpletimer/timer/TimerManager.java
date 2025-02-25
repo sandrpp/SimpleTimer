@@ -1,16 +1,16 @@
 package me.sandrp.simpletimer.timer;
 import me.sandrp.simpletimer.message.ActionBarMessage;
 import me.sandrp.simpletimer.message.MessageManager;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.sandrp.simpletimer.Main;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class TimerManager {
-    private final FileConfiguration config = Main.getPlugin().getConfig();
+    FileConfiguration config = Main.getPlugin().getConfig();
     private int timer = config.getInt("timer");
     private boolean timerRunning = config.getBoolean("running");
     private BukkitRunnable timerRunnable;
@@ -19,8 +19,8 @@ public class TimerManager {
 
     private final PauseScreenManager pauseScreenManager = new PauseScreenManager();
 
-    String hex1 = "#bbd0ff";
-    String hex2 = "#ffd6ff";
+    String hex1 = config.getString("hex1");
+    String hex2 = config.getString("hex2");
     double phase = -1.0;
     boolean transitionUp = true;
 
@@ -43,13 +43,13 @@ public class TimerManager {
                         transitionUp = true;
                     }
                     if (transitionUp) {
-                        phase += 0.1;
+                        phase += 0.05;
                     } else {
-                        phase -= 0.1;
+                        phase -= 0.05;
                     }
 
                     BigDecimal bd = new BigDecimal(Double.toString(phase));
-                    bd = bd.setScale(1, RoundingMode.HALF_UP);
+                    bd = bd.setScale(2, RoundingMode.HALF_UP);
                     phase = bd.doubleValue();
 
                     if (up) {
@@ -64,7 +64,7 @@ public class TimerManager {
                             cancel();
                         }
                     }
-                    ActionBarMessage.broadcastMessage("<grey>Timer - <transition:" + hex1 +":" + hex2 + ":" + phase + "><bold>" + MessageManager.shortInteger(timer));
+                    ActionBarMessage.broadcastMessage("<grey>Timer - <gradient:" + hex1 +":" + hex2 + ":" + phase + "><bold>" + MessageManager.shortInteger(timer));
                     config.set("timer", timer);
                     Main.getPlugin().saveConfig();
                 }
@@ -191,5 +191,8 @@ public class TimerManager {
 public void setHex(String hex1, String hex2){
         this.hex1 = hex1;
         this.hex2 = hex2;
+        config.set("hex1", hex1);
+        config.set("hex2", hex2);
+        Main.getPlugin().saveConfig();
     }
 }

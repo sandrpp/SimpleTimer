@@ -4,14 +4,13 @@ import me.sandrp.simpletimer.Main;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class MessageManager {
-    private static MiniMessage miniMessage = MiniMessage.miniMessage();
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public static void defaultMessage(@NotNull Player playerIn, String messageIn){
         Component messageOut = miniMessage.deserialize(messageIn);
@@ -23,33 +22,20 @@ public class MessageManager {
     }
     public static void mainPrefixMessage(@NotNull Player playerIn, String messageIn){
         Component messageOut = miniMessage.deserialize(messageIn);
-        playerIn.sendMessage(Main.prefix.append(messageOut));
+        playerIn.sendMessage(Main.getPrefix().append(messageOut));
     }
     public static void mainPrefixMessage(@NotNull CommandSender commandSender, String messageIn){
         Component messageOut = miniMessage.deserialize(messageIn);
-        commandSender.sendMessage(Main.prefix.append(messageOut));
+        commandSender.sendMessage(Main.getPrefix().append(messageOut));
     }
     public static void errorPrefixMessage(@NotNull Player playerIn, String messageIn){
         Component messageOut = miniMessage.deserialize(messageIn);
-        playerIn.sendMessage(Main.errorPrefix.append(messageOut).color(TextColor.color(229, 53, 46)));
-    }
-    public static void errorPrefixMessage(ConsoleCommandSender console, String messageIn){
-        Component messageOut = miniMessage.deserialize(messageIn);
-        console.sendMessage(Main.errorPrefix.append(messageOut).color(TextColor.color(229, 34, 19)));
+        playerIn.sendMessage(Main.getErrorPrefix().append(messageOut).color(TextColor.color(229, 53, 46)));
     }
     public static void errorPrefixMessage(CommandSender commandSender, String messageIn){
         Component messageOut = miniMessage.deserialize(messageIn);
-        commandSender.sendMessage(Main.errorPrefix.append(messageOut).color(TextColor.color(229, 34, 19)));
+        commandSender.sendMessage(Main.getErrorPrefix().append(messageOut).color(TextColor.color(229, 34, 19)));
     }
-    public static void broadcastMessage(String messageIn){
-        Component messageOut = miniMessage.deserialize(messageIn);
-        Bukkit.broadcast(messageOut);
-    }
-    public static void broadcastMainPrefixMessage(String messageIn){
-        Component messageOut = miniMessage.deserialize(messageIn);
-        Bukkit.broadcast(Main.prefix.append(messageOut));
-    }
-
 
     public static String shortInteger(int duration){
         String string = "";

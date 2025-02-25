@@ -1,8 +1,7 @@
 package me.sandrp.simpletimer.timer;
 
 import me.sandrp.simpletimer.Main;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import me.sandrp.simpletimer.message.ActionBarMessage;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PauseScreenManager {
@@ -19,23 +18,21 @@ public class PauseScreenManager {
         pauseScreenRunnable = new BukkitRunnable() {
             @Override
             public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    if(counter == 1){
-                        player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer - <#da4918><bold>paused"));
-                        counter++;
-                    }
-                    else if(counter == 2){
-                        player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer / <#da4918><bold>paused"));
-                        counter++;
-                    }
-                    else if(counter == 3){
-                        player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer | <#da4918><bold>paused"));
-                        counter++;
-                    }
-                    else if(counter == 4){
-                        player.sendActionBar(Main.miniMessage.deserialize("<grey>Timer \\ <#da4918><bold>paused"));
-                        counter = 1;
-                    }
+                if(counter == 1){
+                    ActionBarMessage.broadcastMessage("<grey>Timer - <#da4918><bold>paused");
+                    counter++;
+                }
+                else if(counter == 2){
+                    ActionBarMessage.broadcastMessage("<grey>Timer / <#da4918><bold>paused");
+                    counter++;
+                }
+                else if(counter == 3){
+                    ActionBarMessage.broadcastMessage("<grey>Timer | <#da4918><bold>paused");
+                    counter++;
+                }
+                else if(counter == 4){
+                    ActionBarMessage.broadcastMessage("<grey>Timer \\ <#da4918><bold>paused");
+                    counter = 1;
                 }
             }
         };pauseScreenRunnable.runTaskTimer(Main.getPlugin(), 0L, 12L);

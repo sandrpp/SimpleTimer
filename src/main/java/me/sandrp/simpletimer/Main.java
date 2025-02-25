@@ -1,6 +1,5 @@
 package me.sandrp.simpletimer;
 
-import me.sandrp.simpletimer.timer.PauseScreenManager;
 import me.sandrp.simpletimer.timer.TimerManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -13,9 +12,9 @@ public final class Main extends JavaPlugin {
     public static Main plugin;
 
     //MiniMessage
-    public static final MiniMessage miniMessage = MiniMessage.miniMessage();
-    public static final Component prefix = miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#ffd6ff:#bbd0ff><bold>SimpleTimer</bold><dark_grey>]</dark_grey> ");
-    public static final Component errorPrefix = miniMessage.deserialize("Error: ");
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private static final Component prefix = miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#ffd6ff:#bbd0ff><bold>SimpleTimer</bold><dark_grey>]</dark_grey> ");
+    private static final Component errorPrefix = miniMessage.deserialize("Error: ");
     private static TimerManager timerManager;
 
     @Override
@@ -26,6 +25,9 @@ public final class Main extends JavaPlugin {
         //set timerManager & pauseScreenManager
         timerManager = new TimerManager();
         timerManager.getPauseScreenManager().startPauseScreen();
+
+        //set config
+        this.saveDefaultConfig();
 
         //register Commands
         CommandRegister.registerCommands(this.getServer());
@@ -41,6 +43,15 @@ public final class Main extends JavaPlugin {
         return plugin;
     }
 
+    @NotNull
+    public static Component getPrefix() {
+        return prefix;
+    }
+
+    @NotNull
+    public static Component getErrorPrefix() {
+        return errorPrefix;
+    }
 
     @NotNull
     public static TimerManager getTimerManager() {
