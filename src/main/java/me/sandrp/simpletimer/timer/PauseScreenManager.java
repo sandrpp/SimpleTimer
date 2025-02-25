@@ -23,7 +23,7 @@ public class PauseScreenManager {
                     counter++;
                 }
                 else if(counter == 2){
-                    ActionBarMessage.broadcastMessage("<grey>Timer / <#da4918><bold>paused");
+                    ActionBarMessage.broadcastMessage("<grey>Timer \\ <#da4918><bold>paused");
                     counter++;
                 }
                 else if(counter == 3){
@@ -31,7 +31,7 @@ public class PauseScreenManager {
                     counter++;
                 }
                 else if(counter == 4){
-                    ActionBarMessage.broadcastMessage("<grey>Timer \\ <#da4918><bold>paused");
+                    ActionBarMessage.broadcastMessage("<grey>Timer / <#da4918><bold>paused");
                     counter = 1;
                 }
             }
@@ -39,6 +39,9 @@ public class PauseScreenManager {
     }
 
     public void stopPauseScreen(){
+        if (!pauseScreenRunning){
+            return;
+        }
         pauseScreenRunning = false;
         pauseScreenRunnable.cancel();
     }

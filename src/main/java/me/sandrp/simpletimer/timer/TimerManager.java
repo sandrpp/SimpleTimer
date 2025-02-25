@@ -28,6 +28,8 @@ public class TimerManager {
         if(timerRunning) {
             return false;
         }
+        visible = true;
+        config.set("visible", true);
         timerRunning = true;
         config.set("running", true);
         Main.getPlugin().saveConfig();
@@ -64,7 +66,7 @@ public class TimerManager {
                             cancel();
                         }
                     }
-                    ActionBarMessage.broadcastMessage("<grey>Timer - <gradient:" + hex1 +":" + hex2 + ":" + phase + "><bold>" + MessageManager.shortInteger(timer));
+                    ActionBarMessage.broadcastMessage("<grey>Timer - <gradient:" + hex1 + ":" + hex2 + ":" + phase + "><bold>" + MessageManager.shortInteger(timer));
                     config.set("timer", timer);
                     Main.getPlugin().saveConfig();
                 }
@@ -105,17 +107,19 @@ public class TimerManager {
         }
     }
 
-    public void toggleTimerVisibility(){
+    public boolean toggleTimerVisibility(){
         if(!visible){
             visible = true;
             config.set("visible", true);
             Main.getPlugin().saveConfig();
             pauseScreenManager.startPauseScreen();
+            return true;
         }else{
             visible = false;
             config.set("visible", false);
             Main.getPlugin().saveConfig();
             hideTimer();
+            return false;
         }
     }
 

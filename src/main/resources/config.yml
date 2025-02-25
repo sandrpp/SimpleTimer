@@ -2,6 +2,7 @@ timer: 0
 running: false
 up: true
 visible: true
+pride: false
 hex1: "#bbd0ff"
 hex2: "#ffd6ff"
 

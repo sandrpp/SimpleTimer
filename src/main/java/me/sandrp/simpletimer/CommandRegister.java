@@ -20,7 +20,7 @@ public class CommandRegister {
     }
 
     public static void registerCommands(@NotNull Server server){
-        COMMANDS.forEach(((s, command) -> server.getCommandMap().register(s, "Commands", command)));
+        COMMANDS.forEach(((s, command) -> server.getCommandMap().register(s, "simpletimer", command)));
     }
 
     public static void unregisterCommands(@NotNull Server server){

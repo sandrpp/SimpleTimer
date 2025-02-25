@@ -24,7 +24,7 @@ public final class Main extends JavaPlugin {
 
         //set timerManager & pauseScreenManager
         timerManager = new TimerManager();
-        timerManager.getPauseScreenManager().startPauseScreen();
+        if(this.getConfig().getBoolean("visible")) timerManager.getPauseScreenManager().startPauseScreen();
 
         //set config
         this.saveDefaultConfig();
