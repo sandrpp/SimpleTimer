@@ -1,6 +1,6 @@
 # SimpleTimer
 
-![timer_picture](https://i.postimg.cc/PfSTDTBM/timer-nb.png)
+![timer_picture](https://i.postimg.cc/XJGzYZdd/2025-02-25-21-53-12.png)
 
 A **minecraft plugin** to display a **timer** in the actionbar.
 see the [wiki](https://github.com/Gxmmxr/SimpleTimer/wiki/) for a explanation of all commands.
