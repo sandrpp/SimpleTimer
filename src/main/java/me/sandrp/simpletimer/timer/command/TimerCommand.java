@@ -34,77 +34,65 @@ public class TimerCommand extends Command {
             return false;
         }
         switch (args[0].toLowerCase()){
-            case "start":
-            case "resume":
-                if(!timerManager.startTimer()){
-                    MessageManager.mainPrefixMessage(sender, "the timer is already running!");
-                    break;
-                }
-                MessageManager.mainPrefixMessage(sender, "you startet the timer!");
-                break;
-            case "stop":
-            case "pause":
-                if(!timerManager.stopTimer()){
-                    MessageManager.mainPrefixMessage(sender, "the timer is already paused!");
-                    break;
-                }
-                MessageManager.mainPrefixMessage(sender, "you paused the timer!");
-                break;
-            case "toggle":
-                if(timerManager.toggleTimer()){
-                    MessageManager.mainPrefixMessage(sender, "you paused the timer!");
-                    break;
-                }
-                MessageManager.mainPrefixMessage(sender, "you started the timer!");
-                break;
-            case "reset":
-                timerManager.resetTimer();
-                MessageManager.mainPrefixMessage(sender, "you reset the timer!");
-                break;
-            case "set":
-                try {
-                    timerManager.setTimer(Integer.parseInt(args[1]));
-                    MessageManager.mainPrefixMessage(sender, "you set the timer to " + args[1] + "s!");
-                } catch (NumberFormatException e){
-                    MessageManager.errorPrefixMessage(sender, "<red>you must specify a number!");
-                }
-                break;
-            case "visibility":
-                if(timerManager.toggleTimerVisibility()){
-                    MessageManager.mainPrefixMessage(sender, "you toggled the timer visibility on!");
-                    break;
-                }
-                MessageManager.mainPrefixMessage(sender, "you toggled the timer visibility off!");
-                break;
-            case "up":
-                timerManager.setUp(true);
-                MessageManager.mainPrefixMessage(sender, "you set the timer to count up!");
-                break;
-            case "down":
-                timerManager.setUp(false);
-                MessageManager.mainPrefixMessage(sender, "you set the timer to count down!");
-                break;
-            case "color":
-                if(args.length < 2){
-                    MessageManager.errorPrefixMessage(sender, "<red>you must specify a color!");
-                    break;
-                }
-                if (!timerManager.setColor(args[1].toLowerCase())){
-                    MessageManager.errorPrefixMessage(sender, "<red>you must specify a valid color!");
-                    break;
-                }
-                MessageManager.mainPrefixMessage(sender, "you set the timer color to " + args[1] + "!");
-                break;
-            case "info":
-                if (args.length == 2 && args[1].equalsIgnoreCase("full")){
-                    PluginInfo.send(sender, true);
-                    break;
-                }
-                PluginInfo.send(sender, false);
-                break;
-            default:
-                MessageManager.errorPrefixMessage(sender, "<red>you must specify a valid subcommand!");
-                break;
+           case "start", "resume" -> {
+               if (!timerManager.startTimer()) {
+                   MessageManager.mainPrefixMessage(sender, "the timer is already running!");
+               } else {
+                   MessageManager.mainPrefixMessage(sender, "you startet the timer!");
+               }
+           }
+           case "stop", "pause" -> {
+               if (!timerManager.stopTimer()) {
+                   MessageManager.mainPrefixMessage(sender, "the timer is already paused!");
+               } else {
+                   MessageManager.mainPrefixMessage(sender, "you paused the timer!");
+               }
+           }
+           case "toggle" -> {
+               if (timerManager.toggleTimer()) {
+                   MessageManager.mainPrefixMessage(sender, "you paused the timer!");
+               } else {
+                   MessageManager.mainPrefixMessage(sender, "you started the timer!");
+               }
+           }
+           case "reset" -> {
+               timerManager.resetTimer();
+               MessageManager.mainPrefixMessage(sender, "you reset the timer!");
+           }
+           case "set" -> {
+               try {
+                   timerManager.setTimer(Integer.parseInt(args[1]));
+                   MessageManager.mainPrefixMessage(sender, "you set the timer to " + args[1] + "s!");
+               } catch (NumberFormatException e) {
+                   MessageManager.errorPrefixMessage(sender, "<red>you must specify a number!");
+               }
+           }
+           case "visibility" -> {
+               if (timerManager.toggleTimerVisibility()) {
+                   MessageManager.mainPrefixMessage(sender, "you toggled the timer visibility on!");
+               } else {
+                   MessageManager.mainPrefixMessage(sender, "you toggled the timer visibility off!");
+               }
+           }
+           case "up" -> {
+               timerManager.setUp(true);
+               MessageManager.mainPrefixMessage(sender, "you set the timer to count up!");
+           }
+           case "down" -> {
+               timerManager.setUp(false);
+               MessageManager.mainPrefixMessage(sender, "you set the timer to count down!");
+           }
+           case "color" -> {
+               if (args.length < 2) {
+                   MessageManager.errorPrefixMessage(sender, "<red>you must specify a color!");
+               } else if (!timerManager.setColor(args[1].toLowerCase())) {
+                   MessageManager.errorPrefixMessage(sender, "<red>you must specify a valid color!");
+               } else {
+                   MessageManager.mainPrefixMessage(sender, "you set the timer color to " + args[1] + "!");
+               }
+           }
+           case "info" -> PluginInfo.send(sender, args.length == 2 && args[1].equalsIgnoreCase("full"));
+           default -> MessageManager.errorPrefixMessage(sender, "<red>you must specify a valid subcommand!");
         }
         return true;
     }

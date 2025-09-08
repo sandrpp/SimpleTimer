@@ -156,38 +156,17 @@ public class TimerManager {
 
     public boolean setColor (String color){
         switch (color){
-            case "red":
-                setHex("#ad2831", "#800e13");
-                break;
-            case "green":
-                setHex("#a3b18a", "#588157");
-                break;
-            case "blue":
-                setHex("#1a759f", "#1e6091");
-                break;
-            case "yellow":
-                setHex("#ffc300", "#ffaa00");
-                break;
-            case "purple":
-                setHex("#9d4edd", "#5a189a");
-                break;
-            case "orange":
-                setHex("#f4a261", "#e76f51");
-                break;
-            case "pink":
-                setHex("#ffb3c1", "#ff758f");
-                break;
-            case "cyan":
-                setHex("#78c6a3", "#469d89");
-                break;
-            case "white":
-                setHex("#bbd0ff", "#ffd6ff");
-                break;
-            case "black":
-                setHex("#343a40", "#212529");
-                break;
-            default:
-                return false;
+            case "red" -> setHex("#ad2831", "#800e13");
+            case "green" -> setHex("#a3b18a", "#588157");
+            case "blue" -> setHex("#1a759f", "#1e6091");
+            case "yellow" -> setHex("#ffc300", "#ffaa00");
+            case "purple" -> setHex("#9d4edd", "#5a189a");
+            case "orange" -> setHex("#f4a261", "#e76f51");
+            case "pink" -> setHex("#ffb3c1", "#ff758f");
+            case "cyan" -> setHex("#78c6a3", "#469d89");
+            case "white" -> setHex("#bbd0ff", "#ffd6ff");
+            case "black" -> setHex("#343a40", "#212529");
+            default -> { return false; }
         }
         return true;
     }
